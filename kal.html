@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="cs">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&display=swap" rel="stylesheet">
+<h2>Kolik mě bude stát auto?</h2>
+
+<table border="4" cellpadding="10" style="border-color: rgb(6, 6, 153);border-radius: 10px;border-width: 7px;">
+    <tr>
+        <th>Parametr</th>
+        <th>Hodnota</th>
+    </tr>
+    <tr>
+        <td>Průměrná spotřeba (l / 100 km)</td>
+        <td><input type="number" id="spotreba"></td>
+    </tr>
+    <tr>
+        <td>Cena paliva (Kč / l)</td>
+        <td><input type="number" id="cena"></td>
+    </tr>
+    <tr>
+        <td>Kolik km najedu za měsíc</td>
+        <td><input type="number" id="km_mesic"></td>
+    </tr>
+    <tr>
+        <td>Pojištění za rok (Kč)</td>
+        <td><input type="number" id="pojisteni"></td>
+    </tr>
+    <tr>
+        <td><b>Měsíční náklady</b></td>
+        <td id="vysledek">-</td>
+    </tr>
+</table>
+
+<br>
+<button onclick="spocitat()">Spočítat</button>
+
+
+<script>
+function spocitat() {
+    let spotreba = parseFloat(document.getElementById("spotreba").value);
+    let cena = parseFloat(document.getElementById("cena").value);
+    let km = parseFloat(document.getElementById("km_mesic").value);
+    let pojisteni = parseFloat(document.getElementById("pojisteni").value);
+
+    if (!spotreba || !cena || !km) {
+        document.getElementById("vysledek").innerText = "Vyplň základní údaje";
+        return;
+    }
+
+    let litry = (spotreba / 100) * km;
+
+    let palivo = litry * cena;
+
+    let celkem = palivo + (pojisteni / 12);
+
+    document.getElementById("vysledek").innerText =
+        celkem.toFixed(0) + " Kč / měsíc";
+}
+</script>
+<a href="index.html" style="display:block; text-align: center; margin-top: 100px;">← Zpět na hlavní stránku</a>
